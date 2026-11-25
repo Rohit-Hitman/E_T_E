@@ -63,7 +63,8 @@ To skip dependency installation after the first run:
 
 ```text
 backend/
-  app.py
+  api/
+    app.py
   requirements.txt
   .env
   tests/

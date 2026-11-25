@@ -14,7 +14,7 @@ Browser
   └── /people API requests
         |
         v
-FastAPI (backend/app.py)
+FastAPI (backend/api/app.py)
   ├── validates request/response data
   ├── serves frontend assets
   └── uses psycopg
@@ -33,7 +33,9 @@ configuration or a separate frontend development server.
 ```text
 backend/
   __init__.py
-  app.py                 FastAPI application, validation, database access
+  api/
+    __init__.py
+    app.py               FastAPI application, validation, database access
   requirements.txt       Python dependencies
   .env                   Local database configuration; ignored by Git
   .env.example           Safe configuration template
@@ -67,7 +69,7 @@ database store timezone-aware timestamps.
 
 ## Backend
 
-`backend/app.py` creates the FastAPI application and defines:
+`backend/api/app.py` creates the FastAPI application and defines:
 
 - `PersonCreate`: trims names and validates that they contain 1–100 characters.
 - `PersonRecord`: response shape containing `name` and timezone-aware `time`.
@@ -124,7 +126,7 @@ From the project root, `start-the-app.ps1` installs backend dependencies
 without printing their values, and runs:
 
 ```powershell
-python -m uvicorn backend.app:app --reload
+python -m uvicorn backend.api.app:app --reload
 ```
 
 FastAPI performs the timestamp-column check before serving requests. The

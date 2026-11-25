@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import psycopg
 from fastapi.testclient import TestClient
 
-from backend.app import create_app
+from backend.api.app import create_app
 
 
 class FakeCursor:
@@ -59,7 +59,7 @@ def test_create_and_list_people(monkeypatch):
     database = [{"name": "Earlier entry", "time": 87}]
     schema = {"time_type": "bigint"}
     monkeypatch.setattr(
-        "backend.app.connect_to_database",
+        "backend.api.app.connect_to_database",
         lambda: FakeConnection(database, schema),
     )
     client = TestClient(create_app())
@@ -103,7 +103,7 @@ def test_validation_and_database_error_handling(monkeypatch):
             return FakeConnection(database, schema)
         raise psycopg.OperationalError("test connection failure")
 
-    monkeypatch.setattr("backend.app.connect_to_database", fail_to_connect)
+    monkeypatch.setattr("backend.api.app.connect_to_database", fail_to_connect)
     client = TestClient(create_app())
 
     with client:
@@ -119,7 +119,7 @@ def test_frontend_is_served(monkeypatch):
     database = []
     schema = {"time_type": "timestamp with time zone"}
     monkeypatch.setattr(
-        "backend.app.connect_to_database",
+        "backend.api.app.connect_to_database",
         lambda: FakeConnection(database, schema),
     )
     client = TestClient(create_app())

@@ -59,7 +59,7 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host "Starting the backend and frontend at http://127.0.0.1:8000/"
 Write-Host "Press Ctrl+C to stop the application."
-& python -m uvicorn backend.app:app --reload
+& python -m uvicorn backend.api.app:app --reload
 if ($LASTEXITCODE -ne 0) {
     throw "The application stopped with an error."
 }
