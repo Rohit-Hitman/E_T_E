@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A calm, simple place to keep the names and moments you want to remember."
+    />
+    <meta name="theme-color" content="#f5f4ef" />
+    <title>People — your little directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="People home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path
+                d="M7.5 22.5c2.4-3.1 5.2-4.7 8.5-4.7s6.1 1.6 8.5 4.7M11 11.6a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+              <path d="M24.5 8.2v4.6M22.2 10.5h4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="brand-name">little<span>circle</span></span>
+        </a>
+
+        <div class="topbar-actions">
+          <div class="connection" aria-live="polite">
+            <span class="connection-dot" id="connection-dot"></span>
+            <span id="connection-label">Connecting</span>
+          </div>
+          <a class="docs-link" href="/docs">
+            API docs
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M4 12 12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-mark"></span> A LITTLE SPACE FOR YOUR PEOPLE</p>
+            <h1>Remember the names<br />that <em>matter.</em></h1>
+            <p class="hero-description">
+              Keep your connections close. Add a name, and we’ll remember when
+              you did.
+            </p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit-center">
+              <svg viewBox="0 0 64 64" fill="none">
+                <path d="M13 46c5-7 11.3-10.5 19-10.5S46 39 51 46M21 21.5a11 11 0 1 1 22 0 11 11 0 0 1-22 0Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span class="orbit-dot orbit-dot-one"></span>
+            <span class="orbit-dot orbit-dot-two"></span>
+            <span class="orbit-dot orbit-dot-three"></span>
+            <div class="art-caption">
+              <span class="caption-sparkle">✳</span>
+              <span>Good things start<br />with a hello.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="overview" aria-label="Directory overview">
+          <div class="overview-stat">
+            <span class="stat-label">IN YOUR CIRCLE</span>
+            <div class="stat-value"><strong id="people-count">—</strong><span>people</span></div>
+          </div>
+          <div class="overview-divider"></div>
+          <div class="overview-stat latest-stat">
+            <span class="stat-label">LATEST HELLO</span>
+            <div class="stat-value"><strong id="latest-entry">—</strong></div>
+          </div>
+          <div class="overview-note">
+            <span class="note-icon" aria-hidden="true">✦</span>
+            <span>Every name has a story.<br /><b>Keep yours close.</b></span>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <section class="entry-card" aria-labelledby="entry-heading">
+            <div class="entry-card-top">
+              <div class="entry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <span class="step-label">01 / ADD SOMEONE</span>
+            </div>
+            <h2 id="entry-heading">A new connection</h2>
+            <p class="entry-description">
+              Start with a name. The moment will take care of itself.
+            </p>
+
+            <form id="person-form" novalidate>
+              <label for="name-input">Their name</label>
+              <div class="input-wrap" id="input-wrap">
+                <input
+                  id="name-input"
+                  name="name"
+                  type="text"
+                  placeholder="e.g. Maya Chen"
+                  maxlength="100"
+                  autocomplete="name"
+                  required
+                />
+                <span class="input-sparkle" aria-hidden="true">✳</span>
+              </div>
+              <div class="field-meta">
+                <span>Names can be up to 100 characters</span>
+                <span id="character-count">0 / 100</span>
+              </div>
+              <button class="submit-button" id="submit-button" type="submit">
+                <span class="button-label">Add to your circle</span>
+                <span class="button-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </button>
+              <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="entry-footnote">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M10 17s6-3 6-8V5l-6-2-6 2v4c0 5 6 8 6 8Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                <path d="m7.5 9.5 1.7 1.7 3.5-3.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Saved privately to your directory
+            </div>
+          </section>
+
+          <section class="directory-card" aria-labelledby="directory-heading">
+            <div class="directory-heading-row">
+              <div>
+                <p class="section-kicker">YOUR DIRECTORY</p>
+                <h2 id="directory-heading">The people <span>you’ve met.</span></h2>
+              </div>
+              <button class="refresh-button" id="refresh-button" type="button" aria-label="Refresh people list" title="Refresh">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M16.2 8A6.4 6.4 0 0 0 5 5.4L3.8 6.6M3.8 6.6V3.8m0 2.8h2.8M3.8 12a6.4 6.4 0 0 0 11.2 2.6l1.2-1.2m0 0v2.8m0-2.8h-2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="directory-toolbar">
+              <div class="list-count">
+                <span class="count-dot"></span>
+                <span id="list-count">Loading your people…</span>
+              </div>
+              <label class="search-field" for="search-input">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5" />
+                  <path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <input id="search-input" type="search" placeholder="Find a name" autocomplete="off" />
+              </label>
+            </div>
+
+            <div class="people-list" id="people-list" aria-live="polite">
+              <div class="list-loading">
+                <span class="loading-spinner"></span>
+                <span>Gathering your people…</span>
+              </div>
+            </div>
+            <div class="directory-footer">
+              <span>Made for remembering.</span>
+              <span class="footer-flower" aria-hidden="true">✳</span>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="page-footer">
+        <span>littlecircle <span class="footer-year">· A quieter kind of address book</span></span>
+        <span>YOUR PEOPLE, YOUR PLACE</span>
+      </footer>
+    </div>
+  </body>
+</html>
